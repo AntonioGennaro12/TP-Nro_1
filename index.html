@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermercado Los Devs</title>
+    <link rel="stylesheet" href="disenio.css">
+</head>
+<body>
+    <div id="cont-superior"> <!--  Contenedor Superior -->
+        <div id="mi-divH">
+            <h1>Supermercado Los Devs (sección Vinos)</h1>
+        </div>
+        <div class="selH">
+            <label for="sel1">Cantidad de Productos a Mostrar</label>
+            <select id="sel1" onchange="eligeCantProd()" name="">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+        <div class="selH">
+            <label for="sel2">Cantidad Permitida de c/Producto</label>
+            <select id="sel2" onchange="eligeCantPermit()" name="" >
+                <option value="1">1</option>
+                <option value="15">15</option>
+                <option value="25">25</option>
+                <option value="50">50</option>option>
+            </select>
+        </div>
+        <div class="selH">
+            <label for="sel3">Combinación de Colores</label>
+            <select id="sel-3" onchange="eligeColores()" name="" >
+                <option value="no">ninguno</option>
+                <option value="r-a">rojo-amarillo</option>
+                <option value="v-v">verde-violeta</option>
+                <option value="a-g">azul-gris</option>
+            </select>
+        </div>
+        <button onclick="generaCodigo()">GENERAR PRODUCTOS</button>
+    </div> <!-- Fin Contenedor Superior -->
+    <!-- Aquí comienza la salida   -->
+    <div id="cont-salida"> <!-- Contenedor de salida -->
+        <div id="la-selec"> <!-- Resumen Selección -->
+            <p>La Cantidad de Productos a mostrar es:..................... 10</p>
+            <p>La Cantidad de productos permitida por compra es:... 50</p>
+            <p>Los Colores seleccionados a usar son:................ verde-violeta</p>
+        </div> <!-- Fin Resumen Selección  -->
+        <div id="cont-productos"> <!-- Contenedor de Productos -->
+            <!-- Inserto algunos contenedores de producto a modo de prueba   -->
+            <!--  en la práctica se generarán hasta 10  -->
+            <div class="cont-prodx">
+                <h2>Producto 1</h2>
+                <div class="cont-imgprod">
+                    <img class="img-prodx" src="https://cdn.shopify.com/s/files/1/0215/7051/9140/products/trivento-reserve-cabernet-sauvignon-2020-vino-trivento-986175_grande.jpg?v=1634676112" alt="">
+                </div>
+                <div class="selP"> <!-- Selección medio de pago -->
+                    <label for="med-pagox">Seleccione forms de Pago</label>
+                    <select name="Forma de pago" id="med-pagox">
+                        <option value="efec">Efectivo</option>
+                        <option value="debi">Débito</option>
+                        <option value="cred">Crédito</option>
+                    </select>
+                </div> <!-- Fin Medio de Pago -->
+                <div class="selP"> <!-- Selección cantidad de producto x -->
+                    <label for="cant-prodx">Seleccione la Cantidad</label>
+                    <select name="Cantidad de Productos" id="cant-prodx">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div> <!-- Fin Cantidades de producto -->
+                <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
+            </div> <!-- Fin Producto x -->
+            <div class="cont-prodx">
+                <h2>Producto 2</h2>
+                <div class="cont-imgprod">
+                    <img class="img-prodx" src="https://static.wixstatic.com/media/550aad_f215c4c5812e4e178a0a87d76bc9cc64~mv2.png/v1/fill/w_270,h_840,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/mockup%20final%20vincent%202020%20web.png" alt="">
+                </div>
+                <div class="selP"> <!-- Selección medio de pago -->
+                    <label for="med-pagox">Seleccione forms de Pago</label>
+                    <select name="Forma de pago" id="med-pagox">
+                        <option value="efec">Efectivo</option>
+                        <option value="debi">Débito</option>
+                        <option value="cred">Crédito</option>
+                    </select>
+                </div> <!-- Fin Medio de Pago -->
+                <div class="selP"> <!-- Selección cantidad de producto x -->
+                    <label for="cant-prodx">Seleccione la Cantidad</label>
+                    <select name="Cantidad de Productos" id="cant-prodx">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div> <!-- Fin Cantidades de producto -->
+                <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
+            </div> <!-- Fin Producto x -->
+            <div class="cont-prodx">
+                <h2>Producto 3</h2>
+                <div class="cont-imgprod">
+                    <img class="img-prodx" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_992,h_558/https://vinofino.club/wp-content/uploads/2020/09/mejores_malbec_argentina-1024x576.png" alt="">
+                </div>
+                <div class="selP"> <!-- Selección medio de pago -->
+                    <label for="med-pagox">Seleccione forms de Pago</label>
+                    <select name="Forma de pago" id="med-pagox">
+                        <option value="efec">Efectivo</option>
+                        <option value="debi">Débito</option>
+                        <option value="cred">Crédito</option>
+                    </select>
+                </div> <!-- Fin Medio de Pago -->
+                <div class="selP"> <!-- Selección cantidad de producto x -->
+                    <label for="cant-prodx">Seleccione la Cantidad</label>
+                    <select name="Cantidad de Productos" id="cant-prodx">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div> <!-- Fin Cantidades de producto -->
+                <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
+            </div> <!-- Fin Producto x -->
+
+            <div class="cont-prodx">
+                <h2>Producto n</h2>
+                <div class="cont-imgprod">
+                    <img class="img-prodx" src="https://assets.iprofesional.com/assets/jpg/2021/07/519709.jpg?7.2.3.5" alt="">
+                </div>
+                <div class="selP"> <!-- Selección medio de pago -->
+                    <label for="med-pagox">Seleccione forms de Pago</label>
+                    <select name="Forma de pago" id="med-pagox">
+                        <option value="efec">Efectivo</option>
+                        <option value="debi">Débito</option>
+                        <option value="cred">Crédito</option>
+                    </select>
+                </div> <!-- Fin Medio de Pago -->
+                <div class="selP"> <!-- Selección cantidad de producto x -->
+                    <label for="cant-prodx">Seleccione la Cantidad</label>
+                    <select name="Cantidad de Productos" id="cant-prodx">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div> <!-- Fin Cantidades de producto -->
+                <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
+            </div> <!-- Fin Producto x -->
+            <!--   Aquí va el resto de los conenedores -->
+        </div> <!-- Fin contendor de Productos -->
+    </div> <!-- Fin Contenedor de salida   -->
+    <script src="manejo.js"></script>
+</body>
+</html>

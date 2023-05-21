@@ -1,0 +1,145 @@
+body {
+    background-color: blanchedalmond;
+    place-content: center;
+ }
+
+ /* INICIO CONTENDOR SUPERIOR */ 
+
+#cont-superior {
+    width: 30vw;
+    margin-left: 34.5%;
+    border: 3px double brown;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    color: darkred;
+    font-family: sans-serif;
+}
+
+#mi-divH h1 {
+    margin-bottom: 2px;
+    font-size: 22px;
+    font-family: sans-serif;
+    color: darkblue
+}
+
+#cont-superior button {
+    background-color: lightcyan;
+    border: solid 3px brown;
+    margin: 2px;
+    border-radius: 25%;
+    width: 20vw;
+    height: 4vh;
+}
+
+.selH {
+    width: 90%;
+    display: flex;
+}
+
+.selH label {
+    width: 70%;
+}
+
+.selH select {
+    background-color: lightcyan;
+    width: 30%;
+    justify-content: right;
+    margin: 1px;
+    margin-left: 15px;
+    border: solid 1px;
+    text-align:center ;
+    color: darkblue;
+}
+
+/* FIN CONTENEDOR SUPERIOR */
+
+/* INICIO CONTENDOR DE SALIDA */ 
+
+#cont-salida {
+    margin: 1px;
+}
+
+#la-selec {
+    width: 30vw;
+    margin: 2px;
+    margin-left: 34.5%;
+    background-color: brown;
+    color: blanchedalmond;
+    border: solid 6px brown;
+}
+
+#la-selec p {
+    margin: 2px;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding-left: 16%;
+}
+
+#cont-productos {
+    border: solid 1px black;
+    background-color: lightgreen;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cont-prodx {
+    width: calc(100% / 7); /* Distribuye en 7 productos por fila */
+    max-width: 200px; /* Ancho máximo para cada contenedor */
+    height: 30%;
+    border: double 1px brown;
+    background-color: yellow;
+    display: grid;
+    place-content: center;
+    margin: 3px;
+}
+
+.cont-prodx h2 {
+    margin-top: 1px;
+    text-align: center;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: darkblue
+}
+
+.cont-imgprod {
+    width: 160px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img-prodx {
+    max-width: 95%;
+    max-height: 95%;
+    width: auto;
+    height: auto;
+}
+
+.selP {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.selP label {
+    width: 100%;
+}
+
+.selP select {
+    background-color: lightcyan;
+    border: solid 2px;
+    text-align:left ;
+    color: darkblue;
+}
+
+#bot-prodx {
+    background-color: lightcyan;
+    border: solid 1px brown;
+    margin-top: 1px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10px;
+}
