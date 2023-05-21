@@ -91,7 +91,7 @@ body {
     max-width: 200px; /* Ancho máximo para cada contenedor */
     height: 30%;
     border: double 1px brown;
-    background-color: yellow;
+    /*background-color: yellow;*/
     display: grid;
     place-content: center;
     margin: 3px;

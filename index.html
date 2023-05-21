@@ -32,11 +32,11 @@
         </div>
         <div class="selH">
             <label for="sel3">Combinación de Colores</label>
-            <select id="sel-3" onchange="eligeColores()" name="" >
+            <select id="sel3" onchange="eligeColores()" name="" >
                 <option value="no">ninguno</option>
-                <option value="r-a">rojo-amarillo</option>
-                <option value="v-v">verde-violeta</option>
-                <option value="a-g">azul-gris</option>
+                <option value="1-2">rojo-amarillo</option>
+                <option value="3-4">verde-violeta</option>
+                <option value="5-6">azul-gris</option>
             </select>
         </div>
         <button onclick="generaCodigo()">GENERAR PRODUCTOS</button>
@@ -44,9 +44,9 @@
     <!-- Aquí comienza la salida   -->
     <div id="cont-salida"> <!-- Contenedor de salida -->
         <div id="la-selec"> <!-- Resumen Selección -->
-            <p>La Cantidad de Productos a mostrar es:..................... 10</p>
-            <p>La Cantidad de productos permitida por compra es:... 50</p>
-            <p>Los Colores seleccionados a usar son:................ verde-violeta</p>
+            <p id="sel-parr1">La Cantidad de Productos a mostrar es:..................... </p>
+            <p id="sel-parr2">La Cantidad de productos permitida por compra es:... </p>
+            <p id="sel-parr3">Los Colores seleccionados a usar son:................. </p>
         </div> <!-- Fin Resumen Selección  -->
         <div id="cont-productos"> <!-- Contenedor de Productos -->
             <!-- Inserto algunos contenedores de producto a modo de prueba   -->
@@ -100,7 +100,7 @@
             <div class="cont-prodx">
                 <h2>Producto 3</h2>
                 <div class="cont-imgprod">
-                    <img class="img-prodx" src="https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_992,h_558/https://vinofino.club/wp-content/uploads/2020/09/mejores_malbec_argentina-1024x576.png" alt="">
+                    <img class="img-prodx" src="https://vinosamerica.com/wp-content/uploads/2019/12/Concha-y-Toro-Reservado-Sweet-Red-2018.png" alt="">
                 </div>
                 <div class="selP"> <!-- Selección medio de pago -->
                     <label for="med-pagox">Seleccione forms de Pago</label>
