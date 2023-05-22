@@ -1,11 +1,14 @@
 const sel1CantProd  = document.querySelector ("#sel1");
 const sel2CantPerm  = document.querySelector ("#sel2");
 const sel3Colores   = document.querySelector ("#sel3");
+
 const selParrCant   = document.querySelector ("#sel-parr1");
 const selParrPerm   = document.querySelector ("#sel-parr2");
-const selParrClrs  = document.querySelector ("#sel-parr3");
+const selParrClrs   = document.querySelector ("#sel-parr3");
 
+const contProductos = document.querySelector ("#cont-productos");      
 
+/* define las constantes de las imagenes de los diferentes productos*/
 const imgP1         = "https://imagenes.eldebate.com/files/vertical_composte_image/files/fp/uploads/2022/07/22/62d9d237c78cd.r_d.399-713.jpeg";
 const imgP2         = "https://www.portugalvineyards.com/60999-large_default/barca-velha-red-1983.jpg";
 const imgP3         = "https://www.winespiritus.com/9116-large_default/casa-ferreirinha-reserva-especial-1994-vino-tinto.jpg";
@@ -16,13 +19,12 @@ const imgP7         = "https://www.bodegacolome.com/wp-content/uploads/2019/02/p
 const imgP8         = "https://www.vinaioimports.com/wp-content/uploads/2022/03/SQ-BORGONA-750-ml-e1646947617618.png";
 const imgP9         = "https://vinotecaligier.com/media/catalog/product/cache/1/image/1000x/9df78eab33525d08d6e5fb8d27136e95/b/e/be01711.jpg";
 const imgP10        = "https://www.casadeuco.com/wp-content/uploads/2021/08/casa-de-uco-winemarket-1000x1000.jpg";
+/* define vector de imagenes */
 const imagenesProd  = [imgP1, imgP2, imgP3, imgP4, imgP5, imgP6, imgP7, imgP8, imgP9, imgP10 ];
 
-let   cantProdMost  = 1;
-let   cantPermitida = 1;
-let   coloresMost   = "no";
-const defltColor    = "lightgreen";
-const defltColorSP  = "verde claro";
+/* Define los colores */ 
+const defltColor    = "blanchedalmond"; 
+const defltColorSP  = "ninguno";
 const colorNro1     = "red";
 const colorNro1SP  = "rojo";
 const colorNro2     = "yellow";
@@ -35,26 +37,34 @@ const colorNro5     = "blue";
 const colorNro5SP  = "azul";
 const colorNro6     = "gray";
 const colorNro6SP  = "gris";
+/* Define los arrays de colores para configurar e informar selección en Español */ 
 const coloresProd   = [defltColor, defltColor];
 const coloresProdSP = [defltColorSP, defltColorSP];
 
+let   cantProdMost  = 1;
+let   cantPermitida = 1;
+let   coloresMost   = "no";
 
-
+/**
+ * Selecciona Cantidad de Producotos a Mostrar
+ */
 function eligeCantProd() {
     cantProdMost = sel1CantProd.value;
     console.log(cantProdMost);
-
 }
 
+/**
+ * Selecciona Cantidad Permitida para compra de productos
+ */
 function eligeCantPermit() {
     cantPermitida = sel2CantPerm.value; 
     console.log(cantPermitida);
 }
-
+/**
+ * Eleige los colores de fondo de los productoa
+ */
 function eligeColores() {
-    console.log(sel3Colores.value);
     coloresMost = sel3Colores.value;
-    console.log(coloresMost);
     switch (coloresMost){
         case "no":
             coloresProd     [0] = defltColor;
@@ -81,17 +91,63 @@ function eligeColores() {
             coloresProdSP   [1] = colorNro6SP;
             break; 
     }
-    //console.log(coloresProd);
     console.log(coloresProdSP);
 }
 
+/**
+ * Genera Código HTML par amostras los producotos seleccionados
+ */
 function generaCodigo(){
-    console.log("Presionó botón Genera Código");
+    contProductos.innerHTML = ""; // borra todo el contenedor
+    // carga los dtos seleccionados
     selParrCant.textContent = "La Cantidad de Productos a mostrar es:..................... "+cantProdMost;
     selParrPerm.textContent = "La Cantidad de productos permitida por compra es:... "+cantPermitida;
-    selParrClrs.textContent = "Los Colores seleccionados a usar son:................. "+coloresProdSP[0]+", "+coloresProdSP[1]; 
+    if(coloresProdSP[0]!= defltColorSP) {
+        selParrClrs.textContent = "Los Colores seleccionados a usar son:................ "+coloresProdSP[0]+", "+coloresProdSP[1];  
+    }
+    else {
+        selParrClrs.textContent = "Los Colores seleccionados a usar son:.................. "+coloresProdSP[0];  
+    }
+    
+    // genera los productos
+    for (let cont=0; cont < cantProdMost; cont++) {
+        let img   = imagenesProd[cont];
+        let color = coloresProd[(cont%2)];
+        contProductos.innerHTML += `
+            <div class="cont-prodx" style="background-color: ${color};">
+                <h2>Producto ${cont+1}</h2>
+                <div class="cont-imgprod">
+                    <img class="img-prodx" src=${img} alt="">
+                </div>
+                <div class="selP">
+                    <label for="med-pagox">Seleccione forms de Pago</label>
+                    <select name="Forma de pago" id="med-pagox">
+                        <option value="efec">Efectivo</option>
+                        <option value="debi">Débito</option>
+                        <option value="cred">Crédito</option>
+                    </select>
+                </div> 
+                <div class="selP">
+                    <label for="cant-prodx">Seleccione la Cantidad</label>
+                    <select id="sel-cantperm" name="Cantidad de Productos" >                        
+                    </select>
+                </div> 
+                <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
+            </div> 
+        `;
+        /* define un identificador para direccionar al selector */
+        const selCanPerm  = document.querySelector ("#sel-cantperm");
+        /* genera los elementos <option> necesarios según lo elegido */ 
+        for (let cont2=1; cont2 <= cantPermitida; cont2++) {
+            selCanPerm.innerHTML += `
+                <option value="${cont2}">${cont2}</option>
+            `;  
+        selCanPerm.id = "" ; /*Borra el identificador del selector recientemente creadopr evitar errores*/          
+        } 
+    }
 }
 
 function comprarProductox(){
     console.log("Presionó botón comprar");
 }
+
