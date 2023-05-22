@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: center;
     padding: 2px;
     color: darkred;
@@ -27,17 +28,19 @@ body {
 }
 
 #cont-superior button {
-    background-color: lightcyan;
+    background-color: wheat;
+    font-weight: bolder;
     border: solid 3px brown;
     margin: 2px;
     border-radius: 25%;
     width: 20vw;
-    height: 4vh;
+    height: 3.5vh;
 }
 
 .selH {
     width: 90%;
     display: flex;
+    text-align: left;
 }
 
 .selH label {
@@ -80,11 +83,14 @@ body {
 }
 
 #cont-productos {
-    border: solid 1px black;
+    border: solid 1px brown;
     background-color:tan;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    /* Para imagen x URL */
+    background-size: cover;
+    background-position: center;
 }
 
 .cont-prodx {
@@ -92,7 +98,6 @@ body {
     max-width: 200px; /* Ancho máximo para cada contenedor */
     height: 30%;
     border: double 1px brown;
-    /*background-color: yellow;*/
     display: grid;
     place-content: center;
     margin: 3px;
@@ -108,8 +113,8 @@ body {
 
 .cont-imgprod {
     background-color: white;
-    width: 160px;
     height: 120px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,6 +130,8 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    font-family: sans-serif;
+    font-size: 12px;
 }
 
 .selP label {
@@ -138,10 +145,11 @@ body {
     color: darkblue;
 }
 
-#bot-prodx {
-    background-color: lightcyan;
-    border: solid 1px brown;
+.bot-prodx {
+    background-color: rgb(190, 190, 140);
+    border: solid 2px brown;
     margin-top: 1px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
     font-size: 10px;
 }

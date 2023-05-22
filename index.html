@@ -39,7 +39,7 @@
                 <option value="5-6">azul-gris</option>
             </select>
         </div>
-        <button onclick="generaCodigo()">GENERAR PRODUCTOS</button>
+        <button id="gen-cod" onclick="generaCodigo()">GENERAR PRODUCTOS</button>
     </div> <!-- Fin Contenedor Superior -->
     <!-- Aquí comienza la salida   -->
     <div id="cont-salida"> <!-- Contenedor de salida -->
@@ -51,31 +51,32 @@
         <div id="cont-productos"> <!-- Contenedor de Productos -->
             <!-- Inserto un contenedor de producto a modo de prueba   -->
             <!--  en la práctica se generarán hasta 10  en forma dinámica-->
+            <!---
             <div class="cont-prodx">
                 <h2>Producto x</h2>
                 <div class="cont-imgprod">
                     <img class="img-prodx" src="" alt="">
                 </div>
-                <div class="selP"> <!-- Selección medio de pago -->
-                    <label for="med-pagox">Seleccione forms de Pago</label>
+                <div class="selP"> 
+                    <label for="med-pagox">Seleccione forma de Pago</label>
                     <select name="Forma de pago" id="med-pagox">
                         <option value="efec">Efectivo</option>
                         <option value="debi">Débito</option>
                         <option value="cred">Crédito</option>
                     </select>
-                </div> <!-- Fin Medio de Pago -->
-                <div class="selP"> <!-- Selección cantidad de producto x -->
+                </div> 
+                <div class="selP"> 
                     <label for="cant-prodx">Seleccione la Cantidad</label>
                     <select id="sel-cantperm" name="Cantidad de Productos" >
-                        <!-- estas opcione spueden llegar hasta 50 --->     
+                           
                         <option value="1">1</option> 
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
-                </div> <!-- Fin Cantidades de producto -->
+                </div> 
                 <button class="bot-prodx" onclick="comprarProductox()">Comprar</button>
-            </div> <!-- Fin Producto x -->
-            <!--   Aquí va el resto de los conenedores hasta 9 más-->
+            </div>  --->
+            <!--   Aquí va el resto de los conenedores hasta 9 más -->
         </div> <!-- Fin contendor de Productos -->
     </div> <!-- Fin Contenedor de salida   -->
     <script src="manejo.js"></script>
