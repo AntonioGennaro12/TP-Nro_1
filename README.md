@@ -6,5 +6,6 @@ Aun me cuesta hacer que cada uno de los bloques o contenedores se comporten como
 que contienen se acomoden el linea o unos arriba del otro.
 Para la v2, agregué la parte de selección de cantidades y colores, definí algunos vectores como los de imagenes y colores.
 En la v3 se completo el algoritmo, se porbó y aparentmente funciona bien.
-Para la v4 flata optimizar el código compactar y agregar comentarios.
-V5: Se mejora el maquetado, se el código con el uso d efunciones, de agregan comentarios y alguno sdetalles de estética y funcionalidad.
+Para la v4 falta optimizar el código compactar y agregar comentarios.
+V4: Se mejora el maquetado y el código con el uso de funciones, se agregan comentarios y alguno sdetalles de estética y funcionalidad.
+V5: Se sigue revisando y agregando correcciones.

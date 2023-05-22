@@ -59,7 +59,7 @@ let   coloresMost   = "no";
  * Cambia la apriencia del Botón de Generacíon de Código
  */
 function chgBotGen() {
-    genCodigo.style.backgroundColor ="brown";
+    genCodigo.style.backgroundColor ="rgb(190, 190, 140)";
     genCodigo.style.color = "white";
 }
 
@@ -94,10 +94,10 @@ function muestraSeleccion (){
     selParrCant.textContent = "La Cantidad de Productos a mostrar es:..................... "+cantProdMost;
     selParrPerm.textContent = "La Cantidad de productos permitida por compra es:... "+cantPermitida;
     if(coloresProdSP[0]!= defltColorSP) {
-        selParrClrs.textContent = "Los Colores seleccionados a usar son:................ "+coloresProdSP[0]+", "+coloresProdSP[1];  
+        selParrClrs.textContent = "Los Colores seleccionados a usar son:................. "+coloresProdSP[0]+", "+coloresProdSP[1];  
     }
     else {
-        selParrClrs.textContent = "Los Colores seleccionados a usar son:.................. "+coloresProdSP[0];  
+        selParrClrs.textContent = "Los Colores seleccionados a usar son:................... "+coloresProdSP[0];  
     }
 }
 
@@ -161,7 +161,7 @@ function generaContProd (contador, imagen, bkcolor) {
                     <select id="sel-cantperm" name="Cantidad de Productos" >                        
                     </select>
                 </div> 
-                <button class="bot-prodx" onclick="comprarProductox(event)">Comprar ${(contador+1)}</button>
+                <button class="bot-prodx" onclick="comprarProductox(event)">Comprar Prod. ${(contador+1)}</button>
             </div> 
         `;
 }
