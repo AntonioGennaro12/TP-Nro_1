@@ -1,6 +1,6 @@
 body {
     background-color: tan;
-    place-content: center;
+    place-content: center;  
  }
 
  /* INICIO CONTENDOR SUPERIOR */ 
@@ -90,7 +90,7 @@ body {
     justify-content: center;
     /* Para imagen x URL */
     background-size: cover;
-    background-position: center;
+    background-position: center;  
 }
 
 .cont-prodx {

@@ -1,11 +1,34 @@
-# TP-Nro_1
-Trabajo Práctico Nro 1 (supermercado los lev)
-El maquetado me llevó mucho trabajo hasta que logré el comportmamient que buscaba.
-Tuve que completar la versión estatica en HTML para poder ver el comportamiento con los 10 productos.
+# Nombre de la Aplicación:
+    Trabajo Práctico Nro 1 - Supermercado Los Lev
+
+# Developer: 
+    Antonio Gennaro
+    ![Foto Autor](Foto_AG.jpg)
+
+# Tipo de productos:
+    Se eligió la Sección Vinos del Supermercado Los Levs
+    ![Foto Vinos Argentinos](Vinos_Argentinos.jpg)
+
+# Experiencia en el Desarrollo
+El maquetado me llevó mucho trabajo hasta que logré el comportamamiento que buscaba.
+Tuve que completar la versión estática en HTML para poder ver el comportamiento con los 10 productos cargados.
 Aun me cuesta hacer que cada uno de los bloques o contenedores se comporten como se debe y que los elementos 
-que contienen se acomoden el linea o unos arriba del otro.
+que contienen se acomoden en la misma linea o unos arriba del otro.
+# Cómo se solucionó:
+Investigando un poco en internet y probando logre el comportmiento buscado.
+
+# Cómo solucionan los errores que presentaban a lo largo del desarrollo
+Mucha prueba y error y consulta de aplicaciones anteriuoires e internet.
+
+# Qué es lo más importante que aprendieron con este proyecto:
+Principalmenete el tema del Maquetado en esta aplicación hubo que utilizar muchso recursos. 
+
 Para la v2, agregué la parte de selección de cantidades y colores, definí algunos vectores como los de imagenes y colores.
-En la v3 se completo el algoritmo, se porbó y aparentmente funciona bien.
+En la v3 se completo el algoritmo, se probó y aparentmente funciona bien.
 Para la v4 falta optimizar el código compactar y agregar comentarios.
 V4: Se mejora el maquetado y el código con el uso de funciones, se agregan comentarios y alguno sdetalles de estética y funcionalidad.
 V5: Se sigue revisando y agregando correcciones.
+
+# Posible funcionalidad que les gustaría agregar:
+Agregué algunas funcionalidades como cambiar textos y colores no pedidos y la indicación del producto comprado con un método para identificar los producots que se deberáin agregar en el carrito.
+En cuanto a las funcionalidades que se podrían agregar en una segunda parte, podría ser emitir el total de la compra acumulada en le carrito. Por ejemplo cuando se muestran 3, 7 o 10 productos permitir que se compre hasta la cantidad indicada en cada caso pero de si se lo desea todos los producots mostrados.  
