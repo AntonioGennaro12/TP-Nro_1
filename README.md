@@ -3,11 +3,11 @@
 
 # Developer: 
     Antonio Gennaro
-    ![Foto Autor](Foto_AG.jpg)
+    ![Foto Autor](Foto_AG.jpg =180x)
 
 # Tipo de productos:
     Se eligió la Sección Vinos del Supermercado Los Levs
-    ![Foto Vinos Argentinos](Vinos_Argentinos.jpg)
+    ![Foto Vinos Argentinos](Vinos_Argentinos.jpg =180x)
 
 # Experiencia en el Desarrollo
 El maquetado me llevó mucho trabajo hasta que logré el comportamamiento que buscaba.
