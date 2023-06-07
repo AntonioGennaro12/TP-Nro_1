@@ -10,7 +10,7 @@
 <body>
     <div id="cont-superior"> <!--  Contenedor Superior -->
         <div id="mi-divH">
-            <h1>Supermercado Los Devs (sección Vinos)</h1>
+            <h1>Supermercado Los Devs (Sector Vinos)</h1>
         </div>
         <div class="selH">
             <label for="sel1">Cantidad de Productos a Mostrar</label>
@@ -34,20 +34,21 @@
             <label for="sel3">Combinación de Colores</label>
             <select id="sel3" onchange="eligeColores()" name="" >
                 <option value="no">ninguno</option>
-                <option value="1-2">rojo-amarillo</option>
-                <option value="3-4">verde-violeta</option>
-                <option value="5-6">azul-gris</option>
+                <option id="color-12" value="1-2">marron-amarillo</option>
+                <option id="color-34" value="3-4">verde-violeta</option>
+                <option id="color-56" value="5-6">azul-gris</option>
             </select>
         </div>
         <button id="gen-cod" onclick="generaCodigo()">GENERAR PRODUCTOS</button>
-    </div> <!-- Fin Contenedor Superior -->
-    <!-- Aquí comienza la salida   -->
-    <div id="cont-salida"> <!-- Contenedor de salida -->
+        <!-- Bloque que muestra la selección (aparece oculto) y se activa con el onclick-->
         <div id="la-selec"> <!-- Resumen Selección -->
             <p id="sel-parr1">La Cantidad de Productos a mostrar es:..................... </p>
             <p id="sel-parr2">La Cantidad de productos permitida por compra es:... </p>
             <p id="sel-parr3">Los Colores seleccionados a usar son:................. </p>
         </div> <!-- Fin Resumen Selección  -->
+    </div> <!-- Fin Contenedor Superior -->
+    <!-- Aquí comienza la salida   -->
+    <div id="cont-salida"> <!-- Contenedor de salida -->
         <div id="cont-productos"> <!-- Contenedor de Productos -->
             <!-- Inserto un contenedor de producto a modo de prueba   -->
             <!--  en la práctica se generarán hasta 10  en forma dinámica-->

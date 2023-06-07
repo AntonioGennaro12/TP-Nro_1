@@ -4,37 +4,78 @@ const miBody        = document.querySelector ("body");
 const sel1CantProd  = document.querySelector ("#sel1");
 const sel2CantPerm  = document.querySelector ("#sel2");
 const sel3Colores   = document.querySelector ("#sel3");
-// Define puntero a boton de Generación d eCódigo
+
+// Define punteros a las opciones de Color
+const opColores12   = document.querySelector ("#color-12");
+const opColores34   = document.querySelector ("#color-34");
+const opColores56   = document.querySelector ("#color-56");
+
+// Define puntero a boton de Generación de Código
 const genCodigo     = document.querySelector ("#gen-cod");
+
+// Define puntero a bloque (div) que muestra la selección realizada 
+const bloqueSelec   = document.querySelector ("#la-selec");
+
 // Define punteros a parrfos para mostrar datos seleccionados
 const selParrCant   = document.querySelector ("#sel-parr1");
 const selParrPerm   = document.querySelector ("#sel-parr2");
 const selParrClrs   = document.querySelector ("#sel-parr3");
+
 // Define puntero al contenedor global de productos
 const contProductos = document.querySelector ("#cont-productos");      
 
-/* define las constantes que apuntan a las imagenes de los diferentes productos*/
-const imgP1         = "https://imagenes.eldebate.com/files/vertical_composte_image/files/fp/uploads/2022/07/22/62d9d237c78cd.r_d.399-713.jpeg";
-const imgP2         = "https://www.portugalvineyards.com/60999-large_default/barca-velha-red-1983.jpg";
-const imgP3         = "https://www.winespiritus.com/9116-large_default/casa-ferreirinha-reserva-especial-1994-vino-tinto.jpg";
-const imgP4         = "https://http2.mlstatic.com/D_725836-MLA32399076578_102019-X.jpg";
-const imgP5         = "https://www.winespiritus.com/3861-home_default/barca-velha-1964-casa-ferreirinha-vino-tinto.jpg";
-const imgP6         = "https://vinosamerica.com/wp-content/uploads/2019/12/Concha-y-Toro-Reservado-Sweet-Red-2018.png";
-const imgP7         = "https://www.bodegacolome.com/wp-content/uploads/2019/02/pro_altura-e1608213512444.png";
-const imgP8         = "https://vinotecaligier.com/media/catalog/product/cache/1/image/1000x/9df78eab33525d08d6e5fb8d27136e95/b/e/be01711.jpg";
-const imgP9         = "https://www.vinaioimports.com/wp-content/uploads/2022/03/SQ-BORGONA-750-ml-e1646947617618.png";
-const imgP10        = "https://www.casadeuco.com/wp-content/uploads/2021/08/casa-de-uco-winemarket-1000x1000.jpg";
+/* Define los nombres de los productos disponibles */
+const prodN1        = "BR Cohn Cabernet Sauvignon Silver Label 750 ml - Applejack";
+const prodN2        = "Toso Barbera D'asti Red - Wine - Amatos Liquor Mart - Shop";
+const prodN3        = "It. Wein Lunatico Primitivo Puglia IGP 750 ml - CULINDO";
+const prodN4        = "Vinho Argentino D.V. Catena Malbec - Malbec 2012 750ml";
+const prodN5        = "Vino Chileno Tinto Gran Reserva Carmenére CLUB DES SOMMELIERS";
+const prodN6        = "Los boldos chateau gran reserva merlot - La buena Cepa ";
+const prodN7        = "Canelones de carrilleras con crema de setas";
+const prodN8        = "Chez Grisoni - Marquês de Borba Vinhas Velhas Alentejo DOC";
+const prodN9        = "Vendita online Montecucco Rosso DOC - 750 ml - Cant. DE TRIACHI";
+const prodN10       = "200 Monges Reserva - La Vinoteca";
+/* define vector de productos */
+const nombresProd   = [prodN1, prodN2, prodN3, prodN4, prodN5, prodN6, prodN7, prodN8, prodN9, prodN10 ];
+
+/* define las imagenes de los diferentes productos*/
+const imgP1         = "https://applejack.com/site/images/BR-Cohn-Cabernet-Sauvignon-Silver-Label-750-ml_1.png";
+const imgP2         = "https://www.amatos.com.au/images/products/lg_5439.jpg";
+const imgP3         = "https://culindo.de/wp-content/uploads/2020/11/Folie1-313-2048x2048.png";
+const imgP4         = "https://universovigil.com/ventas/95-thickbox_default/dv-catena-syrah-syrah.jpg";
+const imgP5         = "https://static.paodeacucar.com/img/uploads/1/926/13006926.jpg";
+const imgP6         = "https://dojiw2m9tvv09.cloudfront.net/23289/product/X_q9dhew4dtwglyrprozzr9w_pb_600x6001873.png?49";
+const imgP7         = "https://2.bp.blogspot.com/-oXDkvAMnhos/WBC4b6h_zZI/AAAAAAAAB-w/zMYXm0xoxCAfAIyTaBYXvWGoGlfogc42ACLcB/s1600/clos-vilo.png";
+const imgP8         = "https://www.chezgrisoni.ch/pub/media/catalog/product/cache/7f8186049d66718fe46d3c8a7f2521da/4/0/400847-marques-de-borba-vinhas-velhas-75-cl.png";
+const imgP9         = "https://www.saporitipiciitaliani.it/282-large_default/montecucco-rosso-doc-750-ml-cantina-de-triachi.jpg";
+const imgP10        = "https://la-vinoteca.es/118-thickbox_default/200-monges-reserva.jpg";
 /* define vector de imagenes */
 const imagenesProd  = [imgP1, imgP2, imgP3, imgP4, imgP5, imgP6, imgP7, imgP8, imgP9, imgP10 ];
+/* Precios de Porducotos */
+const precProd1     = 3500;
+const precProd2     = 4300;
+const precProd3     = 5200;
+const precProd4     = 3800;
+const precProd5     = 3700;
+const precProd6     = 4300;
+const precProd7     = 3300;
+const precProd8     = 4700;
+const precProd9     = 3900;
+const precProd10    = 3600;
+/* define vector de precios */
+const precioProd    = [precProd1, precProd2, precProd3, precProd4, precProd5, precProd6, precProd7, precProd8, precProd9, precProd10];
+/* Vector que almacena cantidad seleccionada */ 
+const  cantSelec    = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // Valor de default = 1 
 
-// define imagen de fondo Contenedor de Productos
-const imgProdBackG  = "https://vinomanos.com/wp-content/uploads/2019/01/valle-de-uco.png"
+// define imagen de fondo de Body y Contenedor de Productos
+const imgBodyBackg  = "https://blog.winesofargentina.com/wp-content/uploads/2017/02/Las-compuertas-Mendoza-1024x683.jpg";
+const imgProdBackg  ="https://img.freepik.com/fotos-premium/bodega-barriles-vino-bodega-espana_223582-823.jpg?w=1060";
 
 /* Define los colores usados como background en los contendores de productos */ 
 const defltColor    = "blanchedalmond"; 
 const defltColorSP  = "ninguno";
-const colorNro1     = "red";
-const colorNro1SP  = "rojo";
+const colorNro1     = "brown";
+const colorNro1SP  = "marron";
 const colorNro2     = "yellow";
 const colorNro2SP  = "amarillo";
 const colorNro3     = "green"; 
@@ -43,11 +84,16 @@ const colorNro4     = "violet";
 const colorNro4SP  = "violeta";
 const colorNro5     = "blue";
 const colorNro5SP  = "azul";
-const colorNro6     = "gray";
+const colorNro6     = "lightgray";
 const colorNro6SP  = "gris";
 /* Define los arrays de colores para configurar e informar selección en Español */ 
 const coloresProd   = [defltColor, defltColor];
 const coloresProdSP = [defltColorSP, defltColorSP]; //en Español
+
+/* INICIALIZACIONES VARIAS */
+opColores12.textContent = colorNro1SP+"-"+colorNro2SP;
+opColores34.textContent = colorNro3SP+"-"+colorNro4SP;
+opColores56.textContent = colorNro5SP+"-"+colorNro6SP;
 
 // Define variables de uso común
 let   cantProdMost  = 1;
@@ -59,6 +105,8 @@ let   coloresMost   = "no";
  * Cambia la apriencia del Botón de Generacíon de Código
  */
 function chgBotGen() {
+    // Aplica imagen de fondo del body 
+    miBody.style.backgroundImage = "url("+imgBodyBackg+")";
     genCodigo.style.backgroundColor ="rgb(190, 190, 140)";
     genCodigo.style.color = "white";
 }
@@ -68,7 +116,7 @@ function chgBotGen() {
  */
 function rstBotGen() {
     genCodigo.style.backgroundColor ="wheat";
-    genCodigo.style.color = "darkred";
+    genCodigo.style.color = "grey";
 }
 
 /**
@@ -91,13 +139,14 @@ function eligeCantPermit() {
  * Muestra los datos seleccionados
  */
 function muestraSeleccion (){
+    bloqueSelec.style.display = "block"; /* muestra el bloque de la selección */
     selParrCant.textContent = "La Cantidad de Productos a mostrar es:..................... "+cantProdMost;
-    selParrPerm.textContent = "La Cantidad de productos permitida por compra es:... "+cantPermitida;
+    selParrPerm.textContent = "La Cantidad de productos permitida por compra es:.. "+cantPermitida;
     if(coloresProdSP[0]!= defltColorSP) {
-        selParrClrs.textContent = "Los Colores seleccionados a usar son:................. "+coloresProdSP[0]+", "+coloresProdSP[1];  
+        selParrClrs.textContent = "Los Colores de fondo a utilizar son:.............. "+coloresProdSP[0]+", "+coloresProdSP[1];  
     }
     else {
-        selParrClrs.textContent = "Los Colores seleccionados a usar son:................... "+coloresProdSP[0];  
+        selParrClrs.textContent = "Los Colores de fondo a utilizar son:............. "+coloresProdSP[0];  
     }
 }
 
@@ -137,31 +186,35 @@ function eligeColores() {
 
 /**
  * Genera el contenedor d eproducto (todo menos las opciones de máx cantidad de productos)
- * @param {number*} contador 
+ * @param {number} index 
+ * @param {string} nombre 
+ * @param {number} precio 
  * @param {string} imagen 
- * @param {*string} bkcolor 
+ * @param {string} bkcolor 
  */
-function generaContProd (contador, imagen, bkcolor) {
+function generaContProd (index, nombre, precio, imagen, bkcolor) {
+    let colTxt = "white";
+    if ((index%2)|| (bkcolor== defltColor)) {colTxt = "blue";};
     contProductos.innerHTML += `
             <div class="cont-prodx" style="background-color: ${bkcolor};">
-                <h2>Producto ${contador+1}</h2>
+                <h2 style="color: ${colTxt}";>${nombre} (Prec. Unit. $${precio}.-)</h2>
                 <div class="cont-imgprod">
                     <img class="img-prodx" src=${imagen} alt="">
                 </div>
-                <div class="selP">
-                    <label for="med-pagox">Seleccione forms de Pago</label>
+                <div class="selP" style="color: ${colTxt}";>
+                    <label for="med-pagox">SELECCIONE LA FORMA DE PAGO</label>
                     <select name="Forma de pago" id="med-pagox">
-                        <option value="efec">Efectivo</option>
-                        <option value="debi">Débito</option>
-                        <option value="cred">Crédito</option>
+                        <option value="efec">EFECTIVO</option>
+                        <option value="debi">DEBITO</option>
+                        <option value="cred">CREDITO</option>
                     </select>
                 </div> 
-                <div class="selP">
-                    <label for="cant-prodx">Seleccione la Cantidad</label>
-                    <select id="sel-cantperm" name="Cantidad de Productos" >                        
+                <div class="selP" style="color: ${colTxt}";>
+                    <label for="cant-prodx">SELECCIONE LA CANTIDAD</label>
+                    <select id="sel-cantperm" onchange="eligeCant(event,${(index)})" name="Cantidad de Productos" >                        
                     </select>
                 </div> 
-                <button class="bot-prodx" onclick="comprarProductox(event)">Comprar Prod. ${(contador+1)}</button>
+                <button class="bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</button>
             </div> 
         `;
 }
@@ -188,25 +241,41 @@ function genOpCantProd  (cantperm) {
 function generaCodigo(){
     rstBotGen();
     contProductos.innerHTML = "";   // borra todo el contenedor
-    contProductos.style.backgroundImage = "url("+imgProdBackG+")";
+    contProductos.style.backgroundImage = "url("+imgProdBackg+")";
     muestraSeleccion ();            // carga los dtos seleccionados
+    contProductos.style.display = "flex"; /* habilita el contenedor de salida*/ 
     // genera los productos
     for (let cont=0; cont < cantProdMost; cont++) {
+        let nomb  = nombresProd [cont];
+        let prec  = precioProd [cont];
         let img   = imagenesProd[cont];
         let color = coloresProd[(cont%2)];
-        generaContProd (cont, img, color);
+        generaContProd (cont, nomb, prec, img, color);
         genOpCantProd  (cantPermitida);
     }
+}
+
+/* AGREGADOS POR FUERA DE LO PEDIDO */
+/**
+ * Preparado para procesar la compra de los productos
+ * @param {string} event 
+ * @param {number} indice 
+ */
+function eligeCant(event, idx) {
+    let opcion      = event.target;
+    cantSelec [idx] = opcion.value;
 }
 
 /**
  * Preparado para procesar la compra de los productos
  * @param {string} event 
+ * @param {number} indice 
  */
-function comprarProductox(event){
+function comprarProductox(event, idx){
     let boton = event.target;
-    //console.log("Presionó el botón '"+boton.textContent+"'");
-    boton.textContent = "COMPRADO!!!";
-    boton.style.color = "red";
+    let prTotal = cantSelec [idx] * precioProd[idx];
+    boton.textContent = "COMPRADO! (En Carrito $"+prTotal+".-";
+    boton.style.color = "darkred";
 }
+
 
