@@ -151,39 +151,71 @@ function muestraSeleccion (){
 }
 
 /**
+ * asigna los colores seleccionados a los vectores de colores tant para mostrar como para los textos 
+ * @param {string} col1 
+ * @param {string} col2 
+ * @param {string} col1SP 
+ * @param {string} col2SP 
+ */
+function asignaColores (col1, col2, col1SP, col2SP)
+    {
+        coloresProd     [0] = col1;
+        coloresProd     [1] = col2;
+        coloresProdSP   [0] = col1SP;
+        coloresProdSP   [1] = col2SP;
+    }
+
+/**
  * Eleige los colores de fondo de los productoa
  */
 function eligeColores() {
     coloresMost = sel3Colores.value;
     switch (coloresMost){
         case "no":
-            coloresProd     [0] = defltColor;
-            coloresProd     [1] = defltColor;
-            coloresProdSP   [0] = defltColorSP;
-            coloresProdSP   [1] = defltColorSP;
+            asignaColores(defltColor, defltColor, defltColorSP, defltColorSP);
             break;
         case "1-2":
-            coloresProd     [0] = colorNro1;
-            coloresProd     [1] = colorNro2;
-            coloresProdSP   [0] = colorNro1SP;
-            coloresProdSP   [1] = colorNro2SP;
-            break;
+           asignaColores(colorNro1, colorNro2, colorNro1SP, colorNro2SP);
+           break;
         case "3-4":
-            coloresProd     [0]= colorNro3;
-            coloresProd     [1]= colorNro4;
-            coloresProdSP   [0] = colorNro3SP;
-            coloresProdSP   [1] = colorNro4SP;
+            asignaColores(colorNro3, colorNro4, colorNro3SP, colorNro4SP);
             break;
         case "5-6":
-            coloresProd     [0] = colorNro5;
-            coloresProd     [1] = colorNro6;
-            coloresProdSP   [0] = colorNro5SP;
-            coloresProdSP   [1] = colorNro6SP;
+            asignaColores(colorNro5, colorNro6, colorNro5SP, colorNro6SP);
             break; 
     }
     chgBotGen();
 }
-
+/**
+ * Genera el selector de forma de pago dentro del contenedor de producto
+ * @param {string} colortexto 
+ * @returns 
+ */
+function genSelP (colortexto) { 
+    return (`
+    <div class="selP" style="color: ${colortexto}";>
+        <label for="med-pagox">SELECCIONE LA FORMA DE PAGO</label>
+        <select name="Forma de pago" id="med-pagox">
+            <option value="efec">EFECTIVO</option>
+            <option value="debi">DEBITO</option>
+            <option value="cred">CREDITO</option>
+        </select>
+    </div> `);           
+}
+/**
+ * Genera el selector de Cantidad a Comprar forma de pago dentro del contenedor de producto
+ * @param {string} colortexto 
+ * @param {number} idx 
+ * @returns 
+ */
+function genSelC (colortexto, idx) {
+    return (`
+    <div class="selP" style="color: ${colortexto}";>
+        <label for="cant-prodx">SELECCIONE LA CANTIDAD</label>
+        <select id="sel-cantperm" onchange="eligeCant(event,${(idx)})" name="Cantidad de Productos" >                        
+        </select>
+    </div> `);
+}
 /**
  * Genera el contenedor d eproducto (todo menos las opciones de máx cantidad de productos)
  * @param {number} index 
@@ -194,26 +226,15 @@ function eligeColores() {
  */
 function generaContProd (index, nombre, precio, imagen, bkcolor) {
     let colTxt = "white";
-    if ((index%2)|| (bkcolor== defltColor)) {colTxt = "blue";};
+    if ((index%2)||(bkcolor == defltColor)) {colTxt = "blue";};
     contProductos.innerHTML += `
             <div class="cont-prodx" style="background-color: ${bkcolor};">
                 <h2 style="color: ${colTxt}";>${nombre} (Prec. Unit. $${precio}.-)</h2>
                 <div class="cont-imgprod">
                     <img class="img-prodx" src=${imagen} alt="">
                 </div>
-                <div class="selP" style="color: ${colTxt}";>
-                    <label for="med-pagox">SELECCIONE LA FORMA DE PAGO</label>
-                    <select name="Forma de pago" id="med-pagox">
-                        <option value="efec">EFECTIVO</option>
-                        <option value="debi">DEBITO</option>
-                        <option value="cred">CREDITO</option>
-                    </select>
-                </div> 
-                <div class="selP" style="color: ${colTxt}";>
-                    <label for="cant-prodx">SELECCIONE LA CANTIDAD</label>
-                    <select id="sel-cantperm" onchange="eligeCant(event,${(index)})" name="Cantidad de Productos" >                        
-                    </select>
-                </div> 
+                ${genSelP(colTxt)}
+                ${genSelC(colTxt, index)}
                 <button class="bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</button>
             </div> 
         `;
