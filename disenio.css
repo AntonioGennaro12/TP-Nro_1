@@ -173,10 +173,14 @@ body {
     margin-top: 1px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    font-size: 70%;
+    font-size: 65%; /* Cambiado */
 }
 
 .bg-body-tertiary {
     --bs-bg-opacity: 1;
     background-color:  lightgreen !important;
+}
+
+h5 {
+    font-size: 70%;  
 }

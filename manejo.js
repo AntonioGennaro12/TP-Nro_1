@@ -27,16 +27,16 @@ const contProductos = document.querySelector ("#cont-productos");
 const contadorCarrito = document.querySelector ("#cont-carrito");
 
 /* Define los nombres de los productos disponibles */
-const prodN1        = "BR Cohn Cabernet Sauvignon Silver Label 750 ml - Applejack";
-const prodN2        = "Toso Barbera D'asti Red - Wine - Amatos Liquor Mart - Shop";
-const prodN3        = "It. Wein Lunatico Primitivo Puglia IGP 750 ml - CULINDO";
-const prodN4        = "Vinho Argentino D.V. Catena Malbec - Malbec 2012 750ml";
+const prodN1        = "BR Cohn Cabernet Sauvignon Silver Label 750ml, USA, Applejack";
+const prodN2        = "Toso Barbera D'asti Ruby Red - Wine - Amatos Liquor Mart Shop";
+const prodN3        = "It. Wein Lunatico Primitivo Puglia-Italy IGP 750 ml - CULINDO";
+const prodN4        = "Vinho Argentino D.V. Catena Malbec Ed.lim.- Malbec 2012 750ml";
 const prodN5        = "Vino Chileno Tinto Gran Reserva Carmenére CLUB DES SOMMELIERS";
-const prodN6        = "Los boldos chateau gran reserva merlot - La buena Cepa ";
-const prodN7        = "Canelones de carrilleras con crema de setas";
-const prodN8        = "Chez Grisoni - Marquês de Borba Vinhas Velhas Alentejo DOC";
-const prodN9        = "Vendita online Montecucco Rosso DOC - 750 ml - Cant. DE TRIACHI";
-const prodN10       = "200 Monges Reserva - La Vinoteca";
+const prodN6        = "Los boldos chateau gran reserva merlot - La buena Cepa, Chile";
+const prodN7        = "Costers del Priorat (Priorato, España) Clos Viló 2013 - Tinto";
+const prodN8        = "Chez Grisoni - Marquês de Borba Vinhas Velhas Alentejo - DOC "; 
+const prodN9        = "Vendita online Montecucco Rosso DOC 750ml, Cantina DE TRIACHI";
+const prodN10       = "200 Monges Tinto Reserva (20 meses en Barrica) - La Vinoteca ";
 /* define vector de productos */
 const nombresProd   = [prodN1, prodN2, prodN3, prodN4, prodN5, prodN6, prodN7, prodN8, prodN9, prodN10 ];
 
@@ -146,7 +146,7 @@ function muestraSeleccion (){
     selParrCant.textContent = "La Cantidad de Productos a mostrar es:..................... "+cantProdMost;
     selParrPerm.textContent = "La Cantidad de productos permitida por compra es:.. "+cantPermitida;
     if(coloresProdSP[0]!= defltColorSP) {
-        selParrClrs.textContent = "Los Colores de fondo a utilizar son:.............. "+coloresProdSP[0]+", "+coloresProdSP[1];  
+        selParrClrs.textContent = "Los Colores de fondo a utilizar son:.............. "+coloresProdSP[0]+" y "+coloresProdSP[1];  
     }
     else {
         selParrClrs.textContent = "Los Colores de fondo a utilizar son:............. "+coloresProdSP[0];  
@@ -231,6 +231,22 @@ function generaContProd (index, nombre, precio, imagen, bkcolor) {
     let colTxt = "white";
     if ((index%2)||(bkcolor == defltColor)) {colTxt = "blue";};
     contProductos.innerHTML += `
+        <div class="card" style="width: 17rem; background-color:${bkcolor};">
+            <div class="cont-imgprod">
+                <img src=${imagen} class="card-img-top img-prodx" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="color:${colTxt}">${nombre} (Prec. Unit. $${precio}.-)</h5>
+                ${genSelP(colTxt)}
+                ${genSelC(colTxt, index)}
+                <!-- <p class="card-text"></p> -->
+                <a href="#" class=" <!-- btn btn-primary --> bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</a>
+            </div>
+        </div>
+        `;
+}
+
+/*
             <div class="cont-prodx" style="background-color: ${bkcolor};">
                 <h2 style="color: ${colTxt}";>${nombre} (Prec. Unit. $${precio}.-)</h2>
                 <div class="cont-imgprod">
@@ -240,8 +256,7 @@ function generaContProd (index, nombre, precio, imagen, bkcolor) {
                 ${genSelC(colTxt, index)}
                 <button class="bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</button>
             </div> 
-        `;
-}
+*/
 
 /**
  * Genera listado de opciones de compra máxima permitida.
@@ -298,7 +313,7 @@ function eligeCant(event, idx) {
 function comprarProductox(event, idx){
     let boton = event.target;
     let prTotal = cantSelec [idx] * precioProd[idx];
-    boton.textContent = "COMPRADO! (En Carrito $"+prTotal+".-";
+    boton.textContent = "COMPRADO! (En Carrito $"+prTotal+".-)";
     boton.style.color = "darkred";
     //contadorCarrito.innerHTML = ``;
     contaCarro += parseInt(cantSelec [idx]);
