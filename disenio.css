@@ -178,9 +178,22 @@ body {
 
 .bg-body-tertiary {
     --bs-bg-opacity: 1;
-    background-color:  lightgreen !important;
+    background-color:  blanchedalmond !important;
 }
 
 h5 {
     font-size: 70%;  
+}
+
+
+@media (min-width: 992px){
+#carrito-1 {
+    display: none;
+    }
+}
+
+@media (max-width: 992px){
+#carrito-2 {
+    display: none;
+    }
 }

@@ -24,7 +24,8 @@ const selParrClrs   = document.querySelector ("#sel-parr3");
 // Define puntero al contenedor global de productos
 const contProductos = document.querySelector ("#cont-productos");      
 // Contador de compras en carrito
-const contadorCarrito = document.querySelector ("#cont-carrito");
+const contadorCarritoUno = document.querySelector ("#cont-carrito-1");
+const contadorCarritoDos = document.querySelector ("#cont-carrito-2");
 
 /* Define los nombres de los productos disponibles */
 const prodN1        = "BR Cohn Cabernet Sauvignon Silver Label 750ml, USA, Applejack";
@@ -317,7 +318,8 @@ function comprarProductox(event, idx){
     boton.style.color = "darkred";
     //contadorCarrito.innerHTML = ``;
     contaCarro += parseInt(cantSelec [idx]);
-    contadorCarrito.innerHTML = `${contaCarro}`;
+    contadorCarritoUno.innerHTML = `${contaCarro}`;
+    contadorCarritoDos.innerHTML = `${contaCarro}`;
 }
 
 
