@@ -39,7 +39,7 @@ const prodN8        = "Chez Grisoni - Marquês de Borba Vinhas Velhas Alentejo -
 const prodN9        = "Vendita online Montecucco Rosso DOC 750ml, Cantina DE TRIACHI";
 const prodN10       = "200 Monges Tinto Reserva (20 meses en Barrica) - La Vinoteca ";
 /* define vector de productos */
-const nombresProd   = [prodN1, prodN2, prodN3, prodN4, prodN5, prodN6, prodN7, prodN8, prodN9, prodN10 ];
+const nombresProd  = [prodN1, prodN2, prodN3, prodN4, prodN5, prodN6, prodN7, prodN8, prodN9, prodN10 ];
 
 /* define las imagenes de los diferentes productos*/
 const imgP1         = "https://applejack.com/site/images/BR-Cohn-Cabernet-Sauvignon-Silver-Label-750-ml_1.png";
@@ -67,9 +67,12 @@ const precProd9     = 3900;
 const precProd10    = 3600;
 /* define vector de precios */
 const precioProd    = [precProd1, precProd2, precProd3, precProd4, precProd5, precProd6, precProd7, precProd8, precProd9, precProd10];
-/* Vector que almacena cantidad seleccionada */ 
-const  cantSelec    = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // Valor de default = 1 
-
+//
+// /* Vector que almacena cantidad seleccionada */ 
+// const  cantSelec    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Valor de default = 0 
+// Los cargo desde el session storage
+const cantSelec = JSON.parse(sessionStorage.getItem('cantSelec'));
+// 
 // define imagen de fondo de Body y Contenedor de Productos
 const imgBodyBackg  = "https://blog.winesofargentina.com/wp-content/uploads/2017/02/Las-compuertas-Mendoza-1024x683.jpg";
 const imgProdBackg  ="https://img.freepik.com/fotos-premium/bodega-barriles-vino-bodega-espana_223582-823.jpg?w=1060";
@@ -78,31 +81,34 @@ const imgProdBackg  ="https://img.freepik.com/fotos-premium/bodega-barriles-vino
 const defltColor    = "blanchedalmond"; 
 const defltColorSP  = "ninguno";
 const colorNro1     = "brown";
-const colorNro1SP  = "marron";
+const colorNro1SP   = "marron";
 const colorNro2     = "yellow";
-const colorNro2SP  = "amarillo";
+const colorNro2SP   = "amarillo";
 const colorNro3     = "green"; 
-const colorNro3SP  = "verde";
+const colorNro3SP   = "verde";
 const colorNro4     = "violet";
-const colorNro4SP  = "violeta";
+const colorNro4SP   = "violeta";
 const colorNro5     = "blue";
-const colorNro5SP  = "azul";
+const colorNro5SP   = "azul";
 const colorNro6     = "lightgray";
-const colorNro6SP  = "gris";
+const colorNro6SP   = "gris";
 /* Define los arrays de colores para configurar e informar selección en Español */ 
 const coloresProd   = [defltColor, defltColor];
 const coloresProdSP = [defltColorSP, defltColorSP]; //en Español
 
-/* INICIALIZACIONES VARIAS */
-opColores12.textContent = colorNro1SP+"-"+colorNro2SP;
-opColores34.textContent = colorNro3SP+"-"+colorNro4SP;
-opColores56.textContent = colorNro5SP+"-"+colorNro6SP;
+/* Definiciones para manejo de Carrito */
+const ContenCarrito = document.querySelector("#contenedor-carrito");
 
 // Define variables de uso común
 let   cantProdMost  = 1;
 let   cantPermitida = 1;
 let   coloresMost   = "no";
 let   contaCarro    = 0;
+
+/* INICIALIZACIONES VARIAS */
+opColores12.textContent = colorNro1SP+"-"+colorNro2SP;
+opColores34.textContent = colorNro3SP+"-"+colorNro4SP;
+opColores56.textContent = colorNro5SP+"-"+colorNro6SP;
 
 /*++++ FUNCIONES +++++*/
 /**
@@ -151,7 +157,7 @@ function muestraSeleccion (){
     }
     else {
         selParrClrs.textContent = "Los Colores de fondo a utilizar son:............. "+coloresProdSP[0];  
-    }
+    }   
 }
 
 /**
@@ -247,18 +253,6 @@ function generaContProd (index, nombre, precio, imagen, bkcolor) {
         `;
 }
 
-/*
-            <div class="cont-prodx" style="background-color: ${bkcolor};">
-                <h2 style="color: ${colTxt}";>${nombre} (Prec. Unit. $${precio}.-)</h2>
-                <div class="cont-imgprod">
-                    <img class="img-prodx" src=${imagen} alt="">
-                </div>
-                ${genSelP(colTxt)}
-                ${genSelC(colTxt, index)}
-                <button class="bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</button>
-            </div> 
-*/
-
 /**
  * Genera listado de opciones de compra máxima permitida.
  * @param {number} cantperm 
@@ -267,7 +261,7 @@ function genOpCantProd  (cantperm) {
     /* Define un identificador para direccionar al selector de Opciones de cantidad*/
     const selCanPerm  = document.querySelector ("#sel-cantperm");
     /* genera los elementos <option> necesarios según lo elegido */ 
-    for (let cont=1; cont <= cantperm; cont++) {
+    for (let cont=0; cont <= cantperm; cont++) {
             selCanPerm.innerHTML += `
                 <option value="${cont}">${cont}</option>
             `;  
@@ -320,6 +314,20 @@ function comprarProductox(event, idx){
     contaCarro += parseInt(cantSelec [idx]);
     contadorCarritoUno.innerHTML = `${contaCarro}`;
     contadorCarritoDos.innerHTML = `${contaCarro}`;
+    sessionStorage.setItem('cantSelec', JSON.stringify(cantSelec));
 }
 
+/* Manejo del Carrito */
+function verCompra() {
+    ContenCarrito.innerHTML = "";
+    for (let i=0 ; i<10 ; i++) {
+        if (parseInt(cantSelec [i]) > 0) {
+            ContenCarrito.innerHTML += `
+            <div>
+            <h4>Prod. ${i+1}: ${nombresProd[i]} - Cant.: ${cantSelec[i]} -
+                Pr. Unit: ${precioProd[i]} - Pr. Total: ${(precioProd[i]*cantSelec[i])}</h4>
+            </div> `;
+        }
+    }
+}
 
