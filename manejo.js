@@ -71,7 +71,7 @@ const precioProd    = [precProd1, precProd2, precProd3, precProd4, precProd5, pr
 // /* Vector que almacena cantidad seleccionada */ 
 // const  cantSelec    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Valor de default = 0 
 // Los cargo desde el session storage
-const cantSelec = JSON.parse(sessionStorage.getItem('cantSelec'));
+var cantSelec = JSON.parse(sessionStorage.getItem('cantSelec'));
 // 
 // define imagen de fondo de Body y Contenedor de Productos
 const imgBodyBackg  = "https://blog.winesofargentina.com/wp-content/uploads/2017/02/Las-compuertas-Mendoza-1024x683.jpg";
@@ -269,6 +269,12 @@ function genOpCantProd  (cantperm) {
     } 
 }
 
+// reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
+function rstCantSelec() {
+    cantSelec = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Valor de default = 0 
+    sessionStorage.setItem('cantSelec', JSON.stringify(cantSelec));
+}
+
 /**
  * Genera Código HTML para mostrar los producotos seleccionados
  */
@@ -276,8 +282,10 @@ function generaCodigo(){
     rstBotGen();
     contProductos.innerHTML = "";   // borra todo el contenedor
     contProductos.style.backgroundImage = "url("+imgProdBackg+")";
-    muestraSeleccion ();            // carga los dtos seleccionados
+    muestraSeleccion ();            // carga los datos seleccionados
     contProductos.style.display = "flex"; /* habilita el contenedor de salida*/ 
+    // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
+    rstCantSelec();
     // genera los productos
     for (let cont=0; cont < cantProdMost; cont++) {
         let nomb  = nombresProd [cont];
@@ -320,14 +328,20 @@ function comprarProductox(event, idx){
 /* Manejo del Carrito */
 function verCompra() {
     ContenCarrito.innerHTML = "";
+    let totalCompra = 0;
     for (let i=0 ; i<10 ; i++) {
+        let prTotal = cantSelec [i] * precioProd[i];
         if (parseInt(cantSelec [i]) > 0) {
             ContenCarrito.innerHTML += `
             <div>
             <h4>Prod. ${i+1}: ${nombresProd[i]} - Cant.: ${cantSelec[i]} -
-                Pr. Unit: ${precioProd[i]} - Pr. Total: ${(precioProd[i]*cantSelec[i])}</h4>
+                    Pr. Unit: $${precioProd[i]}.- / Pr. Total: $${prTotal}.-</h4>
             </div> `;
+            totalCompra += prTotal;
         }
     }
+    ContenCarrito.innerHTML += `
+            <h3>Total de la Compra: $${totalCompra}.-<h/3> 
+        `;
 }
 
