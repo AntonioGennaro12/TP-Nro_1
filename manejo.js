@@ -23,6 +23,10 @@ const selParrClrs   = document.querySelector ("#sel-parr3");
 
 // Define puntero al contenedor global de productos
 const contProductos = document.querySelector ("#cont-productos");      
+
+// Define cont carrousel
+const miCarrousel   = document.querySelector ("#carouselExample"); 
+
 // Contador de compras en carrito
 const contadorCarritoUno = document.querySelector ("#cont-carrito-1");
 const contadorCarritoDos = document.querySelector ("#cont-carrito-2");
@@ -212,6 +216,23 @@ function genSelP (colortexto) {
         </select>
     </div> `);           
 }
+
+/**
+ * Genera listado de opciones de compra máxima permitida.
+ * @param {number} cantperm 
+ */
+function genOpCantProd  (cantperm) {
+    /* define un bloque HTML */
+    let bloqueHtml = "";
+    /* genera los elementos <option> necesarios según lo elegido */ 
+    for (let cont=0; cont <= cantperm; cont++) {
+            bloqueHtml += `
+                <option value="${cont}">${cont}</option>
+            `;  
+    } 
+    return (bloqueHtml);
+}
+
 /**
  * Genera el selector de Cantidad a Comprar forma de pago dentro del contenedor de producto
  * @param {string} colortexto 
@@ -223,11 +244,13 @@ function genSelC (colortexto, idx) {
     <div class="selP" style="color: ${colortexto}";>
         <label for="cant-prodx">SELECCIONE LA CANTIDAD</label>
         <select id="sel-cantperm" onchange="eligeCant(event,${(idx)})" name="Cantidad de Productos" >                        
+        ${genOpCantProd(cantPermitida)} 
         </select>
     </div> `);
 }
+
 /**
- * Genera el contenedor d eproducto (todo menos las opciones de máx cantidad de productos)
+ * Genera el contenedor de producto (todo menos las opciones de máx cantidad de productos)
  * @param {number} index 
  * @param {string} nombre 
  * @param {number} precio 
@@ -237,7 +260,7 @@ function genSelC (colortexto, idx) {
 function generaContProd (index, nombre, precio, imagen, bkcolor) {
     let colTxt = "white";
     if ((index%2)||(bkcolor == defltColor)) {colTxt = "blue";};
-    contProductos.innerHTML += `
+    return (`
         <div class="card" style="width: 17rem; background-color:${bkcolor};">
             <div class="cont-imgprod">
                 <img src=${imagen} class="card-img-top img-prodx" alt="...">
@@ -250,23 +273,26 @@ function generaContProd (index, nombre, precio, imagen, bkcolor) {
                 <a href="#" class=" <!-- btn btn-primary --> bot-prodx" onclick="comprarProductox(event,${(index)})">COMPRAR</a>
             </div>
         </div>
-        `;
+        `);
 }
 
 /**
- * Genera listado de opciones de compra máxima permitida.
- * @param {number} cantperm 
- */
-function genOpCantProd  (cantperm) {
-    /* Define un identificador para direccionar al selector de Opciones de cantidad*/
-    const selCanPerm  = document.querySelector ("#sel-cantperm");
-    /* genera los elementos <option> necesarios según lo elegido */ 
-    for (let cont=0; cont <= cantperm; cont++) {
-            selCanPerm.innerHTML += `
-                <option value="${cont}">${cont}</option>
-            `;  
-        selCanPerm.id = "" ; /*Borra el identificador del selector recientemente creado.*/          
-    } 
+* Genera la cantidad de productos elegida
+* @returns {string}
+*/
+function generaCantProd() {
+    let bloqueHTML = "";
+    for (let cont=0; cont < cantProdMost; cont++) {
+        let nomb  = nombresProd [cont];
+        let prec  = precioProd [cont];
+        let img   = imagenesProd[cont];
+        let color = coloresProd[(cont%2)];
+        if (cont == 0) { bloqueHTML += `<div class="carousel-item active">`;}
+        else {bloqueHTML += `<div class="carousel-item ">`;}
+        bloqueHTML += generaContProd (cont, nomb, prec, img, color);
+        bloqueHTML += `</div> `;
+    }
+    return (bloqueHTML);
 }
 
 // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
@@ -276,25 +302,44 @@ function rstCantSelec() {
 }
 
 /**
+ * Agrega los botones para el slider
+ * @returns {string}
+ */
+function agregaBotonSlide () {
+    return (` 
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+    `);
+}
+
+/**
  * Genera Código HTML para mostrar los producotos seleccionados
  */
 function generaCodigo(){
     rstBotGen();
     contProductos.innerHTML = "";   // borra todo el contenedor
     contProductos.style.backgroundImage = "url("+imgProdBackg+")";
-    muestraSeleccion ();            // carga los datos seleccionados
+    muestraSeleccion (); // carga los datos seleccionados
     contProductos.style.display = "flex"; /* habilita el contenedor de salida*/ 
-    // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
-    rstCantSelec();
-    // genera los productos
-    for (let cont=0; cont < cantProdMost; cont++) {
-        let nomb  = nombresProd [cont];
-        let prec  = precioProd [cont];
-        let img   = imagenesProd[cont];
-        let color = coloresProd[(cont%2)];
-        generaContProd (cont, nomb, prec, img, color);
-        genOpCantProd  (cantPermitida);
-    }
+    rstCantSelec(); // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
+    let granBloqueHtml = ""; // genera los productos    
+    granBloqueHtml = `
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+            `;
+    granBloqueHtml += generaCantProd();
+    granBloqueHtml += `
+            </div> `;
+    granBloqueHtml += agregaBotonSlide();
+    granBloqueHtml += `
+        </div> `;
+    contProductos.innerHTML = granBloqueHtml;
 }
 
 /* AGREGADOS POR FUERA DE LO PEDIDO */
@@ -325,7 +370,9 @@ function comprarProductox(event, idx){
     sessionStorage.setItem('cantSelec', JSON.stringify(cantSelec));
 }
 
-/* Manejo del Carrito */
+/**
+/* Manejo del Carrito 
+*/
 function verCompra() {
     ContenCarrito.innerHTML = "";
     let totalCompra = 0;
