@@ -84,8 +84,8 @@ body {
 
 #cont-salida {
     width: 95%;
-    display: inline-block;
-    padding-left: 5%; 
+    /*display: inline-block;*/
+    padding: 2%; 
     margin: 0 auto; 
     margin-top: 2px;
 }
@@ -95,7 +95,7 @@ body {
     background-color:tan;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center;*/
     /* Para imagen x URL */
     background-size: cover;
     background-position: center;  
@@ -116,7 +116,7 @@ body {
 .cont-prodx h2 {
     margin-top: 1px;
     padding-top: 5px;
-    width: 260px;
+    /*width: 260px;*/
     height: 45px;
     line-height: 1;
     /*font-size: 0.85vw;*/
@@ -195,4 +195,113 @@ h5 {
 #carrito-2 {
     display: none;
     }
+}
+
+/* Estilos para el carrusel */
+.carousel-container {
+    width: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    margin: auto;
+    /* width: fit-content;*/
+    transition: transform 0.75s ease-in-out;
+}
+
+.carousel-elem {
+    /*max-width: 40%;*/
+    align-content: left;
+    flex: 0 0 20%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.carousel-elem  h3 {
+    font-size: small;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: beige;
+}
+
+.carousel-button1 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+  }
+  .carousel-button2 {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+  }
+  .carousel-button1.left {
+    left: 3px;
+  }
+  .carousel-button1.right {
+    right: 3px;
+  }
+  .carousel-button2.left {
+    left: 3px;
+  }
+  .carousel-button2.right {
+    right: 3px;
+  }
+
+  /* Estilos Carrito y Lista de Compras */
+
+  #contenedor-carrito {
+    display: block;
+    padding-left: 1%;
+  }
+#ver-compras {
+    border-radius: 5px;
+    background-color: blanchedalmond;    
+    }
+
+#cont-lista-compras {
+    display: block;
+}
+.lista-C {
+    display: flex;
+    flex-wrap: wrap; 
+    padding: 1px;
+    /* box-sizing: border-box;*/
+    font-family: 'Lucida Sans Regular';
+    font-size: medium;
+}
+.lista-C p {
+    flex: 0 0 15%;
+    padding-left: 1%;
+    padding-right: 2%;
+    display: flex;
+    
+}
+.li-prod{width: 5%; text-align: center;}
+.li-nomb{width: 30%;text-align: left;
+}
+.li-cant{width: 10%;}
+.li-prun{width: 10%;}
+.li-prto{width: 10%;}
+
+
+#total-compra {
+    font-size: larger;
+    font-weight: bold;
+    margin: 3%;
 }

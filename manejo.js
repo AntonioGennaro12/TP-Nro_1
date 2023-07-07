@@ -58,7 +58,9 @@ const imgP9         = "https://www.saporitipiciitaliani.it/282-large_default/mon
 const imgP10        = "https://la-vinoteca.es/118-thickbox_default/200-monges-reserva.jpg";
 /* define vector de imagenes */
 const imagenesProd  = [imgP1, imgP2, imgP3, imgP4, imgP5, imgP6, imgP7, imgP8, imgP9, imgP10 ];
-/* Precios de Porducotos */
+/* Define máxima cant de productos */
+const maxProductos  = 10;    
+/* Precios de Producotos */
 const precProd1     = 3500;
 const precProd2     = 4300;
 const precProd3     = 5200;
@@ -71,7 +73,7 @@ const precProd9     = 3900;
 const precProd10    = 3600;
 /* define vector de precios */
 const precioProd    = [precProd1, precProd2, precProd3, precProd4, precProd5, precProd6, precProd7, precProd8, precProd9, precProd10];
-//
+
 // /* Vector que almacena cantidad seleccionada */ 
 // const  cantSelec    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Valor de default = 0 
 // Los cargo desde el session storage
@@ -100,21 +102,66 @@ const colorNro6SP   = "gris";
 const coloresProd   = [defltColor, defltColor];
 const coloresProdSP = [defltColorSP, defltColorSP]; //en Español
 
-/* Definiciones para manejo de Carrito */
-const ContenCarrito = document.querySelector("#contenedor-carrito");
-
 // Define variables de uso común
 let   cantProdMost  = 1;
 let   cantPermitida = 1;
 let   coloresMost   = "no";
 let   contaCarro    = 0;
 
-/* INICIALIZACIONES VARIAS */
-opColores12.textContent = colorNro1SP+"-"+colorNro2SP;
-opColores34.textContent = colorNro3SP+"-"+colorNro4SP;
-opColores56.textContent = colorNro5SP+"-"+colorNro6SP;
-
 /*++++ FUNCIONES +++++*/
+
+// Funcion de manejo del Carousel / slider 
+let contCarou = 0;
+function carouselSlide (direction) {
+    const carousel = document.querySelector('.carousel-slide');
+    const carouselItems = document.querySelectorAll('.carousel-elem');
+    const itemWidth = carouselItems[0].offsetWidth;
+    console.log("itWi:"+itemWidth);
+    const containerWidth = carousel.offsetWidth;
+    console.log("coWi:"+containerWidth);
+    const visibleItems = Math.floor(containerWidth / itemWidth);
+    console.log("viIt:"+visibleItems);
+    const totalItems = carouselItems.length;
+    console.log("toIt:"+totalItems);
+    // Calcular la cantidad de slides que deben mostrarse
+    const slidesToShow = Math.min(visibleItems, totalItems);
+    console.log("slTS:"+slidesToShow);
+    // Calcular el desplazamiento en píxeles
+    const slideWidth = itemWidth * slidesToShow;
+    console.log("slWi:"+slideWidth);
+    const slideOffset = direction * slideWidth;
+    console.log("slOf:"+slideOffset);
+    // Obtener la posición actual
+    const currentPosition = carousel.scrollLeft;
+    const newPosition = currentPosition + slideOffset;
+    console.log("cuPo:"+currentPosition);
+    console.log("nwPo:"+newPosition);
+  
+    // Ajustar la posición para mostrar los slides correctamente
+    const maxPosition = (totalItems - slidesToShow) * itemWidth;
+    const minPosition = 0;
+    console.log("mxPo:"+maxPosition);
+    let adjustedPosition = Math.max(minPosition, Math.min(maxPosition, newPosition));
+    console.log("adPo:"+adjustedPosition);
+    // Si el desplazamiento excede el ancho total, ajustar a la posición máxima
+    // Idem para la mínima
+    if ((direction == 1)||(direction == -1)){ 
+        contCarou += direction; // avnza o retrocede de a uno...
+        console.log("coCa:"+contCarou);
+        console.log("mxPo:"+((maxPosition/itemWidth)+1));
+        if (contCarou == ((maxPosition/itemWidth)+1)){contCarou--}
+        else if (contCarou < 0){contCarou++};
+        adjustedPosition = (currentPosition + (itemWidth*contCarou));
+        console.log("adPo:"+adjustedPosition);
+    }
+    else {
+        if (direction > 0) {adjustedPosition = (maxPosition);} // Va al final
+        else {adjustedPosition = (minPosition);} // Vuelve al principio
+      }
+    // Aplicar la transformación CSS para mover el carrusel
+    carousel.style.transform = `translateX(-${adjustedPosition}px)`;
+  }
+
 /**
  * Cambia la apriencia del Botón de Generacíon de Código
  */
@@ -287,11 +334,12 @@ function generaCantProd() {
         let prec  = precioProd [cont];
         let img   = imagenesProd[cont];
         let color = coloresProd[(cont%2)];
-        if (cont == 0) { bloqueHTML += `<div class="carousel-item active">`;}
-        else {bloqueHTML += `<div class="carousel-item ">`;}
+        bloqueHTML += `<div class="carousel-elem">`;
         bloqueHTML += generaContProd (cont, nomb, prec, img, color);
-        bloqueHTML += `</div> `;
-    }
+        bloqueHTML += `            
+                    <h3>Producto:${cont+1}</h3>
+                </div>`;
+        }
     return (bloqueHTML);
 }
 
@@ -302,19 +350,15 @@ function rstCantSelec() {
 }
 
 /**
- * Agrega los botones para el slider
+ * Agrega los botones para el slider (1 o -1) avanza o retrocede 1 slide, 2 va hasta el final o ppio.
  * @returns {string}
  */
 function agregaBotonSlide () {
-    return (` 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-    </button>
+    return (`
+        <div class="carousel-button1 left" onclick="carouselSlide(-1)">&#10094;</div>
+        <div class="carousel-button2 left" onclick="carouselSlide(-2)">&#10094 &#10094;</div>
+        <div class="carousel-button1 right" onclick="carouselSlide(1)">&#10095;</div>
+        <div class="carousel-button2 right" onclick="carouselSlide(2)">&#10095 &#10095;</div> 
     `);
 }
 
@@ -325,23 +369,23 @@ function generaCodigo(){
     rstBotGen();
     contProductos.innerHTML = "";   // borra todo el contenedor
     contProductos.style.backgroundImage = "url("+imgProdBackg+")";
-    muestraSeleccion (); // carga los datos seleccionados
+    muestraSeleccion ();     // carga los datos seleccionados
     contProductos.style.display = "flex"; /* habilita el contenedor de salida*/ 
-    rstCantSelec(); // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
-    let granBloqueHtml = ""; // genera los productos    
-    granBloqueHtml = `
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-            `;
-    granBloqueHtml += generaCantProd();
-    granBloqueHtml += `
-            </div> `;
-    granBloqueHtml += agregaBotonSlide();
-    granBloqueHtml += `
-        </div> `;
+    rstCantSelec();     // reinicializa la cantidad seleccionada y guardo en el "sessionStorage"
+    let granBloqueHtml = "";    // genera los productos 
+        granBloqueHtml = `
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                `;
+        granBloqueHtml += generaCantProd();
+        granBloqueHtml += `
+                </div> `;
+        //granBloqueHtml += `<script src="carousel.js"></script>`;
+        granBloqueHtml += agregaBotonSlide();
+        granBloqueHtml += `
+            </div> `;            
     contProductos.innerHTML = granBloqueHtml;
 }
-
 /* AGREGADOS POR FUERA DE LO PEDIDO */
 /**
  * Preparado para procesar la compra de los productos
@@ -374,21 +418,29 @@ function comprarProductox(event, idx){
 /* Manejo del Carrito 
 */
 function verCompra() {
-    ContenCarrito.innerHTML = "";
+    /* Definiciones para manejo de Carrito */
+    const ContenCarrito = document.querySelector("#contenedor-carrito");
+    const ContenCompra  = document.querySelector("#cont-lista-compras");
+    //ContenCarrito.innerHTML = "";
+    ContenCompra.innerHTML = "";
     let totalCompra = 0;
-    for (let i=0 ; i<10 ; i++) {
+    for (let i=0 ; i<maxProductos ; i++) {
         let prTotal = cantSelec [i] * precioProd[i];
         if (parseInt(cantSelec [i]) > 0) {
-            ContenCarrito.innerHTML += `
-            <div>
-            <h4>Prod. ${i+1}: ${nombresProd[i]} - Cant.: ${cantSelec[i]} -
-                    Pr. Unit: $${precioProd[i]}.- / Pr. Total: $${prTotal}.-</h4>
-            </div> `;
+            ContenCompra.innerHTML += `
+            <div class="lista-C">
+                <p class="li-prod">Producto: ${i+1}:</p>
+                <p class="li-nomb">${nombresProd[i]}</p>
+                <p class="li-cant">Cant.: ${cantSelec[i]}</p>
+                <p class="li-prun">Pr. Unit: $${precioProd[i]}.-</p>
+                <p class="li-prto">Pr. Total: $${prTotal}.-</p>
+            </div> 
+            `;
             totalCompra += prTotal;
         }
     }
-    ContenCarrito.innerHTML += `
-            <h3>Total de la Compra: $${totalCompra}.-<h/3> 
+    ContenCompra.innerHTML += `
+            <p id="total-compra">Total de la Compra: $${totalCompra}.-</p> 
         `;
 }
 
