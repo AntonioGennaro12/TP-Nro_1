@@ -131,8 +131,8 @@ function carouselSlide (direction) {
     console.log("slWi:"+slideWidth);
     const slideOffset = direction * slideWidth;
     console.log("slOf:"+slideOffset);
-    // Obtener la posición actual
-    const currentPosition = carousel.scrollLeft;
+    // Obtener la posición actual *** ESTO FALLA POR LO TANTO NO LO USO 
+    const currentPosition = carousel.scrollLeft; // << ESTO ADA SIEMPRE 0, por lo tanto no se mueve...
     const newPosition = currentPosition + slideOffset;
     console.log("cuPo:"+currentPosition);
     console.log("nwPo:"+newPosition);
@@ -143,6 +143,7 @@ function carouselSlide (direction) {
     console.log("mxPo:"+maxPosition);
     let adjustedPosition = Math.max(minPosition, Math.min(maxPosition, newPosition));
     console.log("adPo:"+adjustedPosition);
+    // ESTE CODIGO FUE INTRODUCIDO PAR ACORREGIR LA FALLA (se define una variable global "contCarou")
     // Si el desplazamiento excede el ancho total, ajustar a la posición máxima
     // Idem para la mínima
     if ((direction == 1)||(direction == -1)){ 
@@ -155,8 +156,14 @@ function carouselSlide (direction) {
         console.log("adPo:"+adjustedPosition);
     }
     else {
-        if (direction > 0) {adjustedPosition = (maxPosition);} // Va al final
-        else {adjustedPosition = (minPosition);} // Vuelve al principio
+        if (direction > 0) {
+            adjustedPosition = (maxPosition);
+            contCarou = (maxPosition/itemWidth);
+          }
+        else {
+          adjustedPosition = (minPosition);
+          contCarou = 0;
+        }
       }
     // Aplicar la transformación CSS para mover el carrusel
     carousel.style.transform = `translateX(-${adjustedPosition}px)`;

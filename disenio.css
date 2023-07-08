@@ -251,16 +251,16 @@ h5 {
     cursor: pointer;
   }
   .carousel-button1.left {
-    left: 3px;
+    left: -1px;
   }
   .carousel-button1.right {
-    right: 3px;
+    right: -1px;
   }
   .carousel-button2.left {
-    left: 3px;
+    left: -1px;
   }
   .carousel-button2.right {
-    right: 3px;
+    right: -1px;
   }
 
   /* Estilos Carrito y Lista de Compras */
@@ -286,22 +286,21 @@ h5 {
     font-size: medium;
 }
 .lista-C p {
-    flex: 0 0 15%;
+    border: 1px brown solid;
     padding-left: 1%;
     padding-right: 2%;
     display: flex;
     
 }
-.li-prod{width: 5%; text-align: center;}
-.li-nomb{width: 30%;text-align: left;
-}
-.li-cant{width: 10%;}
-.li-prun{width: 10%;}
-.li-prto{width: 10%;}
+.li-prod{flex: 0 0 10%; text-align: center;}
+.li-nomb{flex: 0 0 25%; text-align: left; left: -25px}
+.li-cant{flex: 0 0 10%;}
+.li-prun{flex: 0 0 12%;}
+.li-prto{flex: 0 0 15%;}
 
 
 #total-compra {
     font-size: larger;
     font-weight: bold;
-    margin: 3%;
+    margin-left: 3%;
 }
